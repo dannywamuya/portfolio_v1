@@ -1,7 +1,12 @@
 const express = require('express');
 const path = require('path');
+const express_enforces_ssl = require('express-enforces-ssl');
 
 const app = express();
+
+app.enable('trust proxy');
+app.use(express_enforces_ssl());
+
 const port = process.env.PORT || 8000;
 
 app.use('/res', express.static(path.resolve(__dirname, 'src', 'res')));
